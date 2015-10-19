@@ -1,0 +1,3 @@
+Observations:
+
+The number that gets input then gets doubled when the function is called.
