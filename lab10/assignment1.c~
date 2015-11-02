@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+int generateValue(int row, int col, int arr[row][col]);
+
+int main (void) {
+	int arraySize;
+	
+	printf("Enter the array size: ");
+	scanf("%d", &arraySize);
+	
+	int matrix[arraySize][arraySize];
+	
+	for (int i = 0; i < arraySize; i++) {
+		for (int j = 0; j < arraySize; j++) {
+			matrix[i][j] = generateValue(i, j, matrix);
+		
+		}
+	}
+	
+	for (int i = 0; i < arraySize; i++) {
+		for (int ii = 0; ii < arraySize; ii++) {
+			printf("\t%d", matrix[i][ii]);
+		
+		}
+		
+		printf("\n");
+	
+	}
+	
+	return 0;
+
+}
+
+int generateValue (int row, int col, int arr[row][col]) {
+	if (row == 0 || col == 0) {
+		return 1;
+	
+	} else {
+		int value = arr[row - 1][col] + arr[row][col - 1];
+		
+		return value;
+	
+	}
+}
