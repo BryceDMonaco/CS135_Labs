@@ -1,0 +1,165 @@
+/*
+	Bryce Monaco
+	CS135-1201
+	
+	Lab 11 - Assignment 1
+
+	Compile with "gcc assignment1.c -o a1 -std=c99 -lm"
+*/
+
+#include <stdio.h>
+#include <math.h>
+
+void PrintArr (int *numArr);
+void String2IntArr (char *numString, int *numInt);
+void InitArr(int *numArr, int N);
+int Multiply (long int *result, int *num1, int *num2);
+
+int main (void) 
+{
+	char firstNumArr[10], secondNumArr[10];
+	int firstIntArray[10], secondIntArray[10];
+	long int result;
+	
+	InitArr(&firstIntArray[0], 10); //Initializes the intArray values to 0
+	InitArr(&secondIntArray[0], 10); //Initializes the intArray values to 0
+	
+	for (int i = 0; i < 10; i++)
+	{
+		printf("%c ", secondNumArr[i]);
+	
+	}
+	
+	printf("\n");
+	
+	printf("Enter two 10-digit numbers:\n");
+	
+	//Get the numbers from the user
+	printf("\tEnter value 1: ");
+		
+	for (int ii = 0; ii < 10; ii++)
+	{
+		char value;
+			
+		scanf("%c", &value);
+		firstNumArr[ii] = value;
+			
+		printf("\nDEBUG: Read %c\n", value);
+	}	
+	
+	printf("\tEnter value 2: ");
+		
+	for (int ii = 0; ii < 10; ii++)
+	{
+		char value;
+			
+		if (ii == 0)
+		{
+			scanf(" %c", &value); //To stop it from reading the newline character
+			secondNumArr[ii] = value;
+			
+		} else
+		{
+			scanf("%c", &value);
+			secondNumArr[ii] = value;
+		}
+			
+		printf("\nDEBUG: Read %c\n", value);
+	}		
+	
+	
+	for (int i = 0; i < 10; i++)
+	{
+		printf("%c ", secondNumArr[i]);
+	
+	}
+	
+	printf("\n");
+	
+	String2IntArr(&firstNumArr[0], &firstIntArray[0]);
+	printf("First Integer Array:\n");
+	PrintArr(&firstIntArray[0]);
+	
+	for (int i = 0; i < 10; i++)
+	{
+		printf("%c ", secondNumArr[i]);
+	
+	}
+	
+	printf("\n");
+	
+	String2IntArr(&secondNumArr[0], &secondIntArray[0]);
+	printf("Second Integer Array:\n");
+	PrintArr(&secondIntArray[0]);
+	
+	result = Multiply(&result, &firstIntArray[0], &secondIntArray[0]); 
+	
+	printf("Result: %ld\n", result);
+	
+	return 0;
+	
+}
+
+//This function prints the values stored in numArr[] from main
+void PrintArr (int *numArr)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		printf("%d ", *(numArr + i));
+	
+	}
+	
+	printf("\n");
+
+}
+
+//This function converts the array values in charArray to ints for the intArray
+void String2IntArr (char *numString, int *numInt)
+{
+
+	printf("\nDEBUG: %c to %d\n", *(numString), *(numString) - '0');
+	for (int i = 0; i < 10; i++)
+	{
+		*(numInt + i) = (int) *(numString + i) - '0';
+	}
+
+}
+
+//This function intializes the elements of intArray to 0
+void InitArr(int *numArr, int N)
+{
+	printf("DEBUG: Before InitArr(): %d %d\n", *(numArr), *(numArr + 1)); //Will output random values, I just need to know that the value changes, so the start values do not matter
+	
+	for (int i = 0; i < N; i++)
+	{
+		*(numArr + i) = 0;
+	
+	}
+	
+	printf("DEBUG: After InitArr(): %d %d\n", *(numArr), *(numArr + 1));
+	
+}
+
+//This function multiplies the two elements of intArray
+int Multiply (long int *result, int *num1, int *num2)
+{
+	long int firstNum = 0, secondNum = 0;
+	
+	for (int i = 0; i < 10; i++)
+	{
+		firstNum += *(num1 + i) * pow(10, (9 - i));
+		
+	}
+	
+	for (int i = 0; i < 10; i++)
+	{
+		secondNum += *(num2 + i) * pow(10, (9 - i));
+		
+	}
+	
+	printf("F: %ld S: %ld\n", firstNum, secondNum);
+	
+	
+	*result = firstNum * secondNum;
+
+}
